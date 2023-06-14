@@ -1,30 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:test/data/note_data.dart';
 import 'package:test/models/note_model.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:test/providers/notes_provider.dart';
 
-class NoteFormScreen extends StatefulWidget {
+class NoteFormScreen extends ConsumerStatefulWidget {
   const NoteFormScreen({super.key});
 
   @override
-  State<NoteFormScreen> createState() => _NoteFormScreenState();
+  ConsumerState<NoteFormScreen> createState() => _NoteFormScreenState();
 }
 
-class _NoteFormScreenState extends State<NoteFormScreen> {
+class _NoteFormScreenState extends ConsumerState<NoteFormScreen> {
   final _formKey = GlobalKey<FormState>();
   String _enteredText = '';
   String _enteredTitle = '';
 
   void saveForm() {
     _formKey.currentState!.save();
-    setState(() {
-      notes.add(
-        NoteItem(
-          text: _enteredText,
-          title: _enteredTitle,
-          date: DateTime.now(),
-        ),
-      );
-    });
+
+    ref.read(notesProvider.notifier).stateAdd(
+          NoteItem(
+              date: DateTime.now(), text: _enteredText, title: _enteredTitle),
+        );
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      content: Text('Note created'),
+    ));
 
     Navigator.of(context).pop();
   }
