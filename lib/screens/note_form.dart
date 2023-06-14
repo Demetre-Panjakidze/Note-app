@@ -52,6 +52,7 @@ class _NoteFormScreenState extends State<NoteFormScreen> {
                   hintText: 'Title..',
                   hintStyle: TextStyle(color: Colors.grey),
                   floatingLabelBehavior: FloatingLabelBehavior.always,
+                  contentPadding: EdgeInsets.symmetric(horizontal: 8.0),
                 ),
                 maxLength: 50,
                 onSaved: (value) {
@@ -66,6 +67,7 @@ class _NoteFormScreenState extends State<NoteFormScreen> {
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey),
                   ),
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: TextFormField(
                     maxLines: null,
                     keyboardType: TextInputType.multiline,
