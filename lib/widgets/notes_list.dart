@@ -14,7 +14,7 @@ class NotesList extends ConsumerWidget {
       child: Text('No notes added yet!'),
     );
 
-    if (notesList.isEmpty) defaultScreen;
+    if (notesList.isEmpty) return defaultScreen;
 
     return Padding(
       padding: const EdgeInsets.all(8.0),

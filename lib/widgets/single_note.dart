@@ -37,14 +37,11 @@ class SingleNote extends ConsumerWidget {
                 style: Theme.of(context).copyWith().textTheme.titleLarge,
               ),
             ),
-            subtitle: Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
-              child: Text(
-                singleNote.text,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 3,
-                style: Theme.of(context).copyWith().textTheme.bodySmall,
-              ),
+            subtitle: Text(
+              singleNote.text,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 3,
+              style: Theme.of(context).copyWith().textTheme.bodySmall,
             ),
           ),
         ),
@@ -53,9 +50,11 @@ class SingleNote extends ConsumerWidget {
           ScaffoldMessenger.of(context).clearSnackBars();
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text('Note removed'),
-            backgroundColor: Colors.red,
           ));
         },
+        background: Container(
+          color: Colors.red,
+        ),
       ),
     );
   }
