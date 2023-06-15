@@ -23,37 +23,35 @@ class SingleNote extends ConsumerWidget {
       },
       child: Dismissible(
         key: Key(singleNote.id),
-        child: Padding(
-          padding: const EdgeInsets.only(bottom: 8.0),
-          child: ListTile(
-            shape: RoundedRectangleBorder(
-              side: const BorderSide(width: 1, color: Colors.black),
-              borderRadius: BorderRadius.circular(5),
-            ),
-            title: Padding(
-              padding: const EdgeInsets.only(bottom: 5, top: 8),
-              child: Text(
-                singleNote.title,
-                style: Theme.of(context).copyWith().textTheme.titleLarge,
-              ),
-            ),
-            subtitle: Text(
-              singleNote.text,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 3,
-              style: Theme.of(context).copyWith().textTheme.bodySmall,
-            ),
-          ),
-        ),
         onDismissed: (direction) {
           ref.read(notesProvider.notifier).stateRemove(singleNote);
           ScaffoldMessenger.of(context).clearSnackBars();
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text('Note removed'),
+            duration: Duration(seconds: 1),
           ));
         },
         background: Container(
           color: Colors.red,
+        ),
+        child: ListTile(
+          shape: RoundedRectangleBorder(
+            side: const BorderSide(width: 1, color: Colors.black),
+            borderRadius: BorderRadius.circular(5),
+          ),
+          title: Padding(
+            padding: const EdgeInsets.only(bottom: 5, top: 8),
+            child: Text(
+              singleNote.title,
+              style: Theme.of(context).copyWith().textTheme.titleLarge,
+            ),
+          ),
+          subtitle: Text(
+            singleNote.text,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 3,
+            style: Theme.of(context).copyWith().textTheme.bodySmall,
+          ),
         ),
       ),
     );

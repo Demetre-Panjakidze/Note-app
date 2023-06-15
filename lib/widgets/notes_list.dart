@@ -18,13 +18,16 @@ class NotesList extends ConsumerWidget {
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: ListView.builder(
+      child: ListView.separated(
         itemCount: notesList.length,
         itemBuilder: ((ctx, index) {
           return SingleNote(
             singleNote: notesList[index],
           );
         }),
+        separatorBuilder: (ctx, index) {
+          return const SizedBox(height: 10);
+        },
       ),
     );
   }

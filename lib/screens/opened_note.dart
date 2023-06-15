@@ -10,7 +10,9 @@ class OpenedNoteScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(singleNote.title)),
+      appBar: AppBar(
+        title: Text(singleNote.title),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(

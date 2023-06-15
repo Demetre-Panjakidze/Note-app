@@ -25,6 +25,7 @@ class _NoteFormScreenState extends ConsumerState<NoteFormScreen> {
     ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
       content: Text('Note created'),
+      duration: Duration(seconds: 1),
     ));
 
     Navigator.of(context).pop();
