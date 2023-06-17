@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:test/providers/notes_provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:test/cubit/notes_cubit.dart';
 import 'package:test/screens/opened_note.dart';
 
 import '../models/note_model.dart';
 
-class SingleNote extends ConsumerWidget {
+class SingleNote extends StatelessWidget {
   const SingleNote({super.key, required this.singleNote});
 
   final NoteItem singleNote;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -24,7 +24,7 @@ class SingleNote extends ConsumerWidget {
       child: Dismissible(
         key: Key(singleNote.id),
         onDismissed: (direction) {
-          ref.read(notesProvider.notifier).stateRemove(singleNote);
+          context.read<NotesCubit>().stateRemove(singleNote);
           ScaffoldMessenger.of(context).clearSnackBars();
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text('Note removed'),

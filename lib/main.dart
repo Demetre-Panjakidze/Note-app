@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:test/screens/notes_screen.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:test/cubit/notes_cubit.dart';
 
 void main() {
-  runApp(const ProviderScope(
-    child: App(),
-  ));
+  runApp(const App());
 }
 
 class App extends StatelessWidget {
@@ -19,7 +17,10 @@ class App extends StatelessWidget {
         useMaterial3: true,
       ),
       title: 'Flutter Notes app',
-      home: const NotesScreen(),
+      home: BlocProvider(
+        create: (context) => NotesCubit(),
+        child: const NotesScreen(),
+      ),
     );
   }
 }

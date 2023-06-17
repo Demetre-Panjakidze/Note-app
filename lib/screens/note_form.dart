@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:test/cubit/notes_cubit.dart';
 import 'package:test/models/note_model.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:test/providers/notes_provider.dart';
 
-class NoteFormScreen extends ConsumerStatefulWidget {
+class NoteFormScreen extends StatefulWidget {
   const NoteFormScreen({super.key});
 
   @override
-  ConsumerState<NoteFormScreen> createState() => _NoteFormScreenState();
+  State<NoteFormScreen> createState() => _NoteFormScreenState();
 }
 
-class _NoteFormScreenState extends ConsumerState<NoteFormScreen> {
+class _NoteFormScreenState extends State<NoteFormScreen> {
   final _formKey = GlobalKey<FormState>();
   String _enteredText = '';
   String _enteredTitle = '';
@@ -18,7 +18,7 @@ class _NoteFormScreenState extends ConsumerState<NoteFormScreen> {
   void saveForm() {
     _formKey.currentState!.save();
 
-    ref.read(notesProvider.notifier).stateAdd(
+    context.read<NotesCubit>().stateAdd(
           NoteItem(
               date: DateTime.now(), text: _enteredText, title: _enteredTitle),
         );
